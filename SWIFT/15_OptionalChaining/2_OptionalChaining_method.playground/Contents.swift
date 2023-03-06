@@ -33,6 +33,7 @@ struct Address {
         self.street = street
     }
     
+    // (수정) 메서드 내부에서 guard 구문의 옵셔널 바인딩 활용
     func fullAddress() -> String? {
         var restAddress: String? = nil
         
@@ -44,17 +45,16 @@ struct Address {
             restAddress = detail
         }
         
-        if let rest: String = restAddress {
-            var fullAddress: String = self.province
-            
-            fullAddress += " " + self.city
-            fullAddress += " " + self.street
-            fullAddress += " " + rest
-            
-            return fullAddress
-        } else {
+        guard let rest: String = restAddress else {
             return nil
         }
+        
+        var fullAddress: String = self.province
+        fullAddress += " " + self.city
+        fullAddress += " " + self.street
+        fullAddress += " " + rest
+        
+        return fullAddress
     }
     
     func printAddress() {
