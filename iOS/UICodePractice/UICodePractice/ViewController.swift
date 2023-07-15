@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     var bookImageView   = UIImageView()
     var appNameLabel    = UILabel()
+    var questionLabel   = UILabel()
     var dateTextField   = UITextField()
     var nameTextField   = UITextField()
     var addBookButton   = UIButton()
@@ -29,13 +30,19 @@ class ViewController: UIViewController {
         view.addSubview(bookImageView)
         
         // appNameLabel
-        appNameLabel.text = "MyBookStack"
-        appNameLabel.font = .systemFont(ofSize: 30, weight: .medium)
+        appNameLabel.text = "MY BOOK STACK"
+        appNameLabel.font = .systemFont(ofSize: 25, weight: .medium)
         appNameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(appNameLabel)
+        
+        // questionLabel
+        questionLabel.text = "What book did you read?"
+        questionLabel.font = .systemFont(ofSize: 20)
+        questionLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(questionLabel)
 
         // dateTextField
-        dateTextField.placeholder = "date"
+        dateTextField.placeholder = "date (ex. 00/00)"
         dateTextField.keyboardType = .numbersAndPunctuation
         dateTextField.borderStyle = .roundedRect
         dateTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +62,7 @@ class ViewController: UIViewController {
         view.addSubview(addBookButton)
         
         // listLabel
-        listLabel.text = "List of books you read"
+        listLabel.text = "A List of books you read"
         listLabel.font = .systemFont(ofSize: 20)
         listLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(listLabel)
@@ -63,6 +70,7 @@ class ViewController: UIViewController {
         // listTextView
         listTextView.text = "Add books..."
         listTextView.font = .systemFont(ofSize: 17)
+        listTextView.textColor = .placeholderText
         listTextView.isEditable = false
         listTextView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(listTextView)
@@ -83,7 +91,7 @@ class ViewController: UIViewController {
             bookImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             bookImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 100),
             bookImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -100),
-            bookImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2)
+            bookImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.15)
         ])
         
         // appNameLabel
@@ -92,11 +100,17 @@ class ViewController: UIViewController {
             appNameLabel.topAnchor.constraint(equalTo: bookImageView.bottomAnchor, constant: 10)
         ])
         
+        // questionLabel
+        NSLayoutConstraint.activate([
+            questionLabel.topAnchor.constraint(equalTo: appNameLabel.bottomAnchor, constant: 30),
+            questionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30)
+        ])
+        
         // dateTextField
         NSLayoutConstraint.activate([
-            dateTextField.topAnchor.constraint(equalTo: appNameLabel.bottomAnchor, constant: 30),
+            dateTextField.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 10),
             dateTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            dateTextField.widthAnchor.constraint(equalToConstant: 150)
+            dateTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4)
         ])
 
         
@@ -116,12 +130,12 @@ class ViewController: UIViewController {
         // listLabel
         NSLayoutConstraint.activate([
             listLabel.topAnchor.constraint(equalTo: addBookButton.bottomAnchor, constant: 40),
-            listLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            listLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30)
         ])
         
         // listTextView
         NSLayoutConstraint.activate([
-            listTextView.topAnchor.constraint(equalTo: listLabel.bottomAnchor, constant: 15),
+            listTextView.topAnchor.constraint(equalTo: listLabel.bottomAnchor, constant: 10),
             listTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             listTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             listTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
@@ -143,7 +157,8 @@ class ViewController: UIViewController {
         
         // textField가 채워져있는지 체크
         if !date.isEmpty, !bookName.isEmpty {
-            bookList += "- \(date) \t \(bookName)\n"
+            listTextView.textColor = .label
+            bookList += "- \(date)\t \(bookName)\n"
             listTextView.text = bookList
         }
         // 하나라도 값이 입력되지 않았을 때 알람이 발생
