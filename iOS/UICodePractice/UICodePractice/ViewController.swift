@@ -62,8 +62,6 @@ class ViewController: UIViewController {
         
         // listTextView
         listTextView.text = "Add books..."
-        listTextView.textColor = .black
-        listTextView.backgroundColor = .white
         listTextView.font = .systemFont(ofSize: 17)
         listTextView.isEditable = false
         listTextView.translatesAutoresizingMaskIntoConstraints = false
