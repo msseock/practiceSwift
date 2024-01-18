@@ -11,6 +11,19 @@ import Foundation
 class ModelData {
     var landmarks: [Landmark] = load("landmarkData.json")
     var hikes: [Hike] = load("hikeData.json")
+    
+    // add a new computed features array, which conatins only the landmarks that have isFeatured set to true
+    var features: [Landmark] {
+        landmarks.filter{ $0.isFeatured }
+    }
+    
+    // add a computed categories dictionary, with category names as keys, and an array of associated landmarks for each key
+    var categories: [String: [Landmark]] {
+        Dictionary(
+            grouping: landmarks,
+            by: { $0.category.rawValue }
+        )
+    }
 }
 
 
