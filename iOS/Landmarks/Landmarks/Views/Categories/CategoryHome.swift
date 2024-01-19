@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CategoryHome: View {
     @Environment(ModelData.self) var modelData
+    @State private var showingProfile = false
     
     var body: some View {
         NavigationSplitView {
@@ -29,7 +30,21 @@ struct CategoryHome: View {
                 }
                 .listRowInsets(EdgeInsets())
             }
+            .listStyle(.inset)
             .navigationTitle("Featured")
+            // 네비게이션 바에 툴바 추가
+            .toolbar {
+                Button {
+                    showingProfile.toggle()
+                } label: {
+                    Label("User Profile", systemImage: "person.crop.circle")
+                }
+            }
+            // showingProfile값에 따라 사용자 프로필을 표시하는 페이지가 밑에서 튀어나옴
+            .sheet(isPresented: $showingProfile) {
+                ProfileHost()
+                    .environment(modelData)
+            }
         } detail: {
             Text("Select a Landmark")
         }
