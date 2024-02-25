@@ -50,8 +50,10 @@ struct LandmarkDetail: View {
             }
             .padding()
         }
+        // ScrollView에 달아주는 네비게이션바 세팅
         .navigationTitle(landmark.name)
         .navigationBarTitleDisplayMode(.inline)
+//        .navigationBarBackButtonHidden(true)
     }
 }
 
