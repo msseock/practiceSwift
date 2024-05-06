@@ -16,6 +16,7 @@
 		C541E3462BE75D5000B01761 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = C541E3452BE75D5000B01761 /* GoogleGenerativeAI */; };
 		C541E3482BE75EBB00B01761 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C541E3472BE75EBB00B01761 /* ChatModel.swift */; };
 		C541E34A2BE7621C00B01761 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C541E3492BE7621C00B01761 /* ChatService.swift */; };
+		C541E34C2BE8BDBE00B01761 /* ChatBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C541E34B2BE8BDBE00B01761 /* ChatBox.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		C541E3422BE75A4C00B01761 /* GenerativeAI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GenerativeAI-Info.plist"; sourceTree = "<group>"; };
 		C541E3472BE75EBB00B01761 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		C541E3492BE7621C00B01761 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
+		C541E34B2BE8BDBE00B01761 /* ChatBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBox.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				C541E3312BE751EA00B01761 /* PracticeChatApp.swift */,
 				C541E3332BE751EA00B01761 /* ContentView.swift */,
 				C541E3472BE75EBB00B01761 /* ChatModel.swift */,
+				C541E34B2BE8BDBE00B01761 /* ChatBox.swift */,
 				C541E3492BE7621C00B01761 /* ChatService.swift */,
 				C541E3352BE751ED00B01761 /* Assets.xcassets */,
 				C541E3372BE751ED00B01761 /* Preview Content */,
@@ -171,6 +174,7 @@
 				C541E3412BE759E500B01761 /* APIKey.swift in Sources */,
 				C541E34A2BE7621C00B01761 /* ChatService.swift in Sources */,
 				C541E3322BE751EA00B01761 /* PracticeChatApp.swift in Sources */,
+				C541E34C2BE8BDBE00B01761 /* ChatBox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

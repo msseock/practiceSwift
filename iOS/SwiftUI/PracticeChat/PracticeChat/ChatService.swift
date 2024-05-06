@@ -44,7 +44,11 @@ class ChatService {
             let response = try await chat.sendMessage(message)
             if let text = response.text {
                 print(text)
+                
+                let lastChatMessageIndex = messages.count - 1
+                messages[lastChatMessageIndex].message += text
             }
+            
             
             history.append(.init(role: "user", parts: message))
             history.append(.init(role: "model", parts: messages.last?.message ?? ""))
