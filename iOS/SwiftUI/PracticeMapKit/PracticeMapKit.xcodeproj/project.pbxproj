@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C5029B402BEB56EC00F87235 /* currentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5029B3F2BEB56EC00F87235 /* currentLocation.swift */; };
+		C5CA661B2BF261B6007BDAC8 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA661A2BF261B6007BDAC8 /* Home.swift */; };
+		C5CA661D2BF2623E007BDAC8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA661C2BF2623E007BDAC8 /* MapView.swift */; };
+		C5CA661F2BF2632D007BDAC8 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA661E2BF2632D007BDAC8 /* MapViewModel.swift */; };
+		C5CA66222BF267E9007BDAC8 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA66212BF267E9007BDAC8 /* MapAnnotation.swift */; };
 		C5CE904D2BEB43F100D76233 /* PracticeMapKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CE904C2BEB43F100D76233 /* PracticeMapKitApp.swift */; };
 		C5CE904F2BEB43F100D76233 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CE904E2BEB43F100D76233 /* ContentView.swift */; };
 		C5CE90512BEB43F200D76233 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5CE90502BEB43F200D76233 /* Assets.xcassets */; };
@@ -15,7 +18,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C5029B3F2BEB56EC00F87235 /* currentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = currentLocation.swift; sourceTree = "<group>"; };
+		C5CA661A2BF261B6007BDAC8 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		C5CA661C2BF2623E007BDAC8 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		C5CA661E2BF2632D007BDAC8 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		C5CA66202BF26747007BDAC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C5CA66212BF267E9007BDAC8 /* MapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		C5CE90492BEB43F100D76233 /* PracticeMapKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PracticeMapKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5CE904C2BEB43F100D76233 /* PracticeMapKitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeMapKitApp.swift; sourceTree = "<group>"; };
 		C5CE904E2BEB43F100D76233 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -34,6 +41,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C5CA66172BF26196007BDAC8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C5CA661A2BF261B6007BDAC8 /* Home.swift */,
+				C5CA661C2BF2623E007BDAC8 /* MapView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C5CA66182BF261A5007BDAC8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C5CA661E2BF2632D007BDAC8 /* MapViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		C5CE90402BEB43F100D76233 = {
 			isa = PBXGroup;
 			children = (
@@ -53,9 +77,12 @@
 		C5CE904B2BEB43F100D76233 /* PracticeMapKit */ = {
 			isa = PBXGroup;
 			children = (
+				C5CA66202BF26747007BDAC8 /* Info.plist */,
+				C5CA66182BF261A5007BDAC8 /* ViewModel */,
+				C5CA66172BF26196007BDAC8 /* View */,
 				C5CE904C2BEB43F100D76233 /* PracticeMapKitApp.swift */,
 				C5CE904E2BEB43F100D76233 /* ContentView.swift */,
-				C5029B3F2BEB56EC00F87235 /* currentLocation.swift */,
+				C5CA66212BF267E9007BDAC8 /* MapAnnotation.swift */,
 				C5CE90502BEB43F200D76233 /* Assets.xcassets */,
 				C5CE90522BEB43F200D76233 /* Preview Content */,
 			);
@@ -142,7 +169,10 @@
 			files = (
 				C5CE904F2BEB43F100D76233 /* ContentView.swift in Sources */,
 				C5CE904D2BEB43F100D76233 /* PracticeMapKitApp.swift in Sources */,
-				C5029B402BEB56EC00F87235 /* currentLocation.swift in Sources */,
+				C5CA661D2BF2623E007BDAC8 /* MapView.swift in Sources */,
+				C5CA661B2BF261B6007BDAC8 /* Home.swift in Sources */,
+				C5CA661F2BF2632D007BDAC8 /* MapViewModel.swift in Sources */,
+				C5CA66222BF267E9007BDAC8 /* MapAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +309,8 @@
 				DEVELOPMENT_TEAM = ZUGAVD3728;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PracticeMapKit/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -308,6 +340,8 @@
 				DEVELOPMENT_TEAM = ZUGAVD3728;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PracticeMapKit/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
