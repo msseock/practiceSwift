@@ -21,6 +21,7 @@ struct ContentView: View {
                     ForEach(chatService.messages) { chatMessage in
                         //MARK: - Chat Message View
                         ChatBox(chatMessage: chatMessage)
+                            .padding(.horizontal)
                     }
                 }
                 // 가장 마지막에 생성된 메시지로 스크롤해주기
@@ -34,7 +35,6 @@ struct ContentView: View {
                     }
                 }
             })
-            .padding(.horizontal)
             
             //MARK: - Input Field
             HStack {
