@@ -54,10 +54,15 @@ class ChatService {
             // 메시지 보내고 응답받기
             let response = try await chat.sendMessage(message)
             if let text = response.text {
-                print(text)
+//                print("가공 전 text: \(text)")
+                
+                // 불필요한 \n 제거
+                let precessedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
+                
+//                print("가공 후 텍스트:", precessedText)
                 
                 let lastChatMessageIndex = messages.count - 1
-                messages[lastChatMessageIndex].message += text
+                messages[lastChatMessageIndex].message += precessedText
             }
             
             
