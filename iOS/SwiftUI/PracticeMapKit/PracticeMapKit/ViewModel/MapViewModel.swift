@@ -21,11 +21,66 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     // Alert...
     @Published var permissionDenied = false
     
+    // SearchText
+    @Published var searchTxt = ""
+    
+    // Searched Places...
+    @Published var places : [Place] = []
+    
     // Focus Location...
     func focusLocation() {
         guard let _ = region else {return}
         
         mapView.setRegion(region, animated: true)
+        mapView.setVisibleMapRect(mapView.visibleMapRect, animated: true)
+    }
+    
+    // Search Places...
+    func searchQuery() {
+        
+        places.removeAll()
+        
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = searchTxt
+        
+        // Fetch...
+        MKLocalSearch(request: request).start { (response, _) in
+            guard let result = response else { return }
+            
+            self.places = result.mapItems.compactMap({ (item) -> Place? in
+                return Place(place: item.placemark)
+            })
+        }
+    }
+    
+    // Pick Search Result
+    func selectPlace(place: Place) {
+        
+        // Showing Pin On Map
+        searchTxt = ""
+        guard let coordinate = place.place.location?.coordinate else { return }
+        
+//        // 정보 출력해보기
+//        print("locality:", place.place.locality ?? "모름")
+//        print("subLocality:", place.place.subLocality ?? "모름")
+//        print("thoroughfare:", place.place.thoroughfare ?? "모름")
+//        print("subThoroughfare:", place.place.subThoroughfare ?? "모름")
+//        print("region:", place.place.region ?? "모름")
+//        print("postalCode:", place.place.postalCode ?? "모름")
+        
+        let pointAnnotation = MKPointAnnotation()
+        pointAnnotation.coordinate = coordinate
+        pointAnnotation.title = place.place.name ?? "No Name"
+        
+        // Removing All Old Ones...
+        mapView.removeAnnotations(mapView.annotations)
+        
+        mapView.addAnnotation(pointAnnotation)
+        
+        // Move Map To That Location...
+        let coordinateRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
+        
+        mapView.setRegion(coordinateRegion, animated: true)
         mapView.setVisibleMapRect(mapView.visibleMapRect, animated: true)
     }
     

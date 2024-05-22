@@ -21,8 +21,60 @@ struct Home: View {
             // using it as environment object so that it can be used ints subViews...
                 .environmentObject(mapData)
                 .ignoresSafeArea(.all, edges: .all)
+                .onTapGesture {
+                    withAnimation {
+                        UIApplication.shared.hideKeyboard()
+                        mapData.searchTxt = ""
+                    }
+                }
             
             VStack {
+                // MARK: 검색창
+                VStack {
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundStyle(Color.gray)
+                        
+                        TextField("Search", text: $mapData.searchTxt)
+                            .colorScheme(.light)
+                    }
+                    .padding(.vertical, 10)
+                    .padding(.horizontal)
+                    .background(Color.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    
+                    // MARK: 검색결과
+                    if !mapData.places.isEmpty && mapData.searchTxt != "" {
+                        ScrollView {
+                            
+                            VStack(spacing: 15) {
+                                
+                                ForEach(mapData.places) { place in
+                                    Text(place.place.name ?? "")
+                                        .foregroundStyle(.black)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .padding(.leading)
+                                            .onTapGesture {
+                                                mapData.selectPlace(place: place)
+                                                UIApplication.shared.hideKeyboard()
+                                            }
+                                    
+                                    Text(place.address)
+                                        .font(.caption)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .padding(.leading)
+                                    
+                                    Divider()
+                                }
+                            }
+                            .padding(.top)
+                        }
+                        .background(Color.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    }
+                }
+                .padding()
+                
                 Spacer()
                 
                 VStack {
@@ -54,9 +106,26 @@ struct Home: View {
                 }
             }))
         }
+        .onChange(of: mapData.searchTxt) {
+            // Searching Places...
+            
+            // You can use your own delay time to avoid Continous Search Request...
+            let delay = 0.3
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                // Search...
+                self.mapData.searchQuery()
+            }
+        }
     }
 }
 
 #Preview {
     Home()
+}
+
+extension UIApplication {
+    func hideKeyboard() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }
