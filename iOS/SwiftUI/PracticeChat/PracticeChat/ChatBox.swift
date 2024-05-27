@@ -18,42 +18,118 @@ struct ChatBox: View {
     var boxColor: Color {
         return role == .model ? .white : Color(red: 253/255, green: 224/255, blue: 139/255)
     }
+    @State var saved: Bool = false
     
     var body: some View {
-        HStack {
+        VStack {
             // 로딩중인 경우(모델 답변 기다리는중일 때)
             if message.isEmpty {
-                ProgressView()
-                    .padding()
-                    .background(boxColor)
-                    .tint(.black)
-                    .clipShape(ChatBubbleShape(role: role))
-                Spacer()
-            }
-            // 로딩 끝
-            else {
-                // 유저일 경우에 오른쪽부터 말풍선 띄워주기
-                if role == .user {
-                    Spacer()
-                    
-                    Text(message)
-                        .padding(16)
+                HStack {
+                    ProgressView()
+                        .padding()
                         .background(boxColor)
-                        .foregroundColor(.black)
-                        .clipShape(ChatBubbleShape(role: role))
-
-                // 모델일 경우 왼쪽부터 말풍선 띄워주기
-                } else {
-                    Text(message)
-                        .padding(16)
-                        .background(boxColor)
-                        .foregroundColor(.black)
+                        .tint(.black)
                         .clipShape(ChatBubbleShape(role: role))
                     
                     Spacer()
                 }
             }
-        }
+            // 로딩 끝
+            else {
+                // 유저일 경우에 오른쪽부터 말풍선 띄워주기
+                if role == .user {
+                    // 말풍선
+                    HStack (spacing: 12) {
+                        Spacer()
+                        
+                        // TODO: 문장고침 여부에 따라 아이콘 바꾸기
+                        Image("ic_check_fill")
+                        
+                        Text(message)
+                            .padding(16)
+                            .background(boxColor)
+                            .foregroundColor(.black)
+                            .clipShape(ChatBubbleShape(role: role))
+                    }
+                    
+                    // 버튼들
+                    HStack (spacing: 8) {
+                        Spacer()
+                        // 스피커 버튼
+                        Button(action: {
+                            // TODO: TTS 호출
+                            print("user_TTS 호출")
+                        }) {
+                            Image("ic_volume_up")
+                                .frame(width: 40, height: 40)
+                                .background(Color(red: 254/255, green: 236/255, blue: 186/255)) // TODO: 나중에 MainColor/Main-30으로 대체
+                                .clipShape(Circle())
+                                .shadow(color: Color(red: 0.24, green: 0.26, blue: 0.27).opacity(0.12), radius: 4, x: 0, y: 4)
+                        }
+                        // 번역 버튼
+                        Button(action: {
+                            // TODO: 번역 호출
+                            print("user_번역 호출")
+                        }) {
+                            Image("ic_translate")
+                                .frame(width: 40, height: 40)
+                                .background(Color(red: 254/255, green: 236/255, blue: 186/255)) // 나중에 MainColor/Main-30으로 대체
+                                .clipShape(Circle())
+                                .shadow(color: Color(red: 0.24, green: 0.26, blue: 0.27).opacity(0.12), radius: 4, x: 0, y: 4)
+                        }
+
+                    }
+
+                // 모델일 경우 왼쪽부터 말풍선 띄워주기
+                } else {
+                    HStack (spacing: 12) {
+                        Text(message)
+                            .padding(16)
+                            .background(boxColor)
+                            .foregroundColor(.black)
+                        .clipShape(ChatBubbleShape(role: role))
+                        
+                        Button(action: {
+                            saved.toggle()
+                            // TODO: 누르면 저장되도록 하기
+                        }, label: {
+                            Image(saved ? "ic_bookmark_fill" : "ic_bookmark")
+                        })
+                        
+                        Spacer()
+                    }
+                    
+                    HStack (spacing: 8) {
+                        // 스피커 버튼
+                        Button(action: {
+                            // TODO: TTS 호출
+                            print("model_tts 호출")
+                        }) {
+                            Image("ic_volume_up")
+                                .frame(width: 40, height: 40)
+                                .background(Color.white)
+                                .clipShape(Circle())
+                                .shadow(color: Color(red: 0.24, green: 0.26, blue: 0.27).opacity(0.12), radius: 4, x: 0, y: 4)
+                        }
+                        
+                        // 번역 버튼
+                        Button(action: {
+                            // TODO: 번역 호출
+                            print("model_번역 호출")
+                        }) {
+                            Image("ic_translate")
+                                .frame(width: 40, height: 40)
+                                .background(Color.white)
+                                .clipShape(Circle())
+                                .shadow(color: Color(red: 0.24, green: 0.26, blue: 0.27).opacity(0.12), radius: 4, x: 0, y: 4)
+                        }
+                        
+                        Spacer()
+                    }
+                    
+                }
+            }
+            }
     }
 }
 
@@ -112,4 +188,8 @@ struct ChatBubbleShape: Shape {
         
         return Path(path.cgPath)
     }
+}
+
+#Preview {
+    ChatBox(chatMessage: ChatMessage(role: .model, message: "여행 계획 있으신가요?"))
 }
