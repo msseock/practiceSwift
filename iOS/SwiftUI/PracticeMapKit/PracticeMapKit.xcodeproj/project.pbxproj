@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C5315E1A2C11A6B300C96F96 /* BookMapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5315E192C11A6B300C96F96 /* BookMapModel.swift */; };
+		C5315E1C2C11A6BC00C96F96 /* BookMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5315E1B2C11A6BC00C96F96 /* BookMapView.swift */; };
 		C5CA661B2BF261B6007BDAC8 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA661A2BF261B6007BDAC8 /* Home.swift */; };
 		C5CA661D2BF2623E007BDAC8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA661C2BF2623E007BDAC8 /* MapView.swift */; };
 		C5CA661F2BF2632D007BDAC8 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA661E2BF2632D007BDAC8 /* MapViewModel.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C5315E192C11A6B300C96F96 /* BookMapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMapModel.swift; sourceTree = "<group>"; };
+		C5315E1B2C11A6BC00C96F96 /* BookMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMapView.swift; sourceTree = "<group>"; };
 		C5CA661A2BF261B6007BDAC8 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		C5CA661C2BF2623E007BDAC8 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		C5CA661E2BF2632D007BDAC8 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
@@ -43,6 +47,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C5315E172C11A69B00C96F96 /* PracticeBookMap */ = {
+			isa = PBXGroup;
+			children = (
+				C5315E192C11A6B300C96F96 /* BookMapModel.swift */,
+				C5315E1B2C11A6BC00C96F96 /* BookMapView.swift */,
+			);
+			path = PracticeBookMap;
+			sourceTree = "<group>";
+		};
 		C5CA66172BF26196007BDAC8 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +92,7 @@
 		C5CE904B2BEB43F100D76233 /* PracticeMapKit */ = {
 			isa = PBXGroup;
 			children = (
+				C5315E172C11A69B00C96F96 /* PracticeBookMap */,
 				C5DFEF802BFD9D7900E5C3E7 /* Model */,
 				C5CA66202BF26747007BDAC8 /* Info.plist */,
 				C5CA66182BF261A5007BDAC8 /* ViewModel */,
@@ -181,10 +195,12 @@
 				C5CE904F2BEB43F100D76233 /* ContentView.swift in Sources */,
 				C5CE904D2BEB43F100D76233 /* PracticeMapKitApp.swift in Sources */,
 				C5CA661D2BF2623E007BDAC8 /* MapView.swift in Sources */,
+				C5315E1C2C11A6BC00C96F96 /* BookMapView.swift in Sources */,
 				C5CA661B2BF261B6007BDAC8 /* Home.swift in Sources */,
 				C5CA661F2BF2632D007BDAC8 /* MapViewModel.swift in Sources */,
 				C5DFEF822BFD9D8C00E5C3E7 /* Place.swift in Sources */,
 				C5CA66222BF267E9007BDAC8 /* MapAnnotation.swift in Sources */,
+				C5315E1A2C11A6B300C96F96 /* BookMapModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -78,6 +78,7 @@ struct Home: View {
                 Spacer()
                 
                 VStack {
+                    // MARK: 현재 위치로 이동 버튼
                     Button(action: mapData.focusLocation, label: {
                         Image(systemName: "location.fill")
                             .font(.title2)
