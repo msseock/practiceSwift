@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C52EC5912C300679004F6BDB /* BookLocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52EC5902C300679004F6BDB /* BookLocationData.swift */; };
 		C52EC5932C3012AA004F6BDB /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52EC5922C3012AA004F6BDB /* AnnotationView.swift */; };
+		C52EC5952C305F21004F6BDB /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52EC5942C305F21004F6BDB /* LocationManager.swift */; };
 		C5315E1A2C11A6B300C96F96 /* BookMapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5315E192C11A6B300C96F96 /* BookMapModel.swift */; };
 		C5315E1C2C11A6BC00C96F96 /* BookMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5315E1B2C11A6BC00C96F96 /* BookMapView.swift */; };
 		C5315E1E2C12DF5500C96F96 /* BookMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5315E1D2C12DF5500C96F96 /* BookMapViewModel.swift */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		C52EC5902C300679004F6BDB /* BookLocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookLocationData.swift; sourceTree = "<group>"; };
 		C52EC5922C3012AA004F6BDB /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
+		C52EC5942C305F21004F6BDB /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		C5315E192C11A6B300C96F96 /* BookMapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMapModel.swift; sourceTree = "<group>"; };
 		C5315E1B2C11A6BC00C96F96 /* BookMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMapView.swift; sourceTree = "<group>"; };
 		C5315E1D2C12DF5500C96F96 /* BookMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMapViewModel.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				C5315E1B2C11A6BC00C96F96 /* BookMapView.swift */,
 				C52EC5922C3012AA004F6BDB /* AnnotationView.swift */,
 				C5315E1D2C12DF5500C96F96 /* BookMapViewModel.swift */,
+				C52EC5942C305F21004F6BDB /* LocationManager.swift */,
 				C52EC5902C300679004F6BDB /* BookLocationData.swift */,
 			);
 			path = PracticeBookMap;
@@ -213,6 +216,7 @@
 				C5DFEF822BFD9D8C00E5C3E7 /* Place.swift in Sources */,
 				C5CA66222BF267E9007BDAC8 /* MapAnnotationView.swift in Sources */,
 				C5315E1A2C11A6B300C96F96 /* BookMapModel.swift in Sources */,
+				C52EC5952C305F21004F6BDB /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
