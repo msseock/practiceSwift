@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct MapAnnotation: View {
+struct MapAnnotationView: View {
 
     
     // 마커 표시할 CLLocationCoordinate2D 객체
@@ -79,5 +79,5 @@ struct MapAnnotation: View {
 }
 
 #Preview {
-    MapAnnotation()
+    MapAnnotationView()
 }
