@@ -55,6 +55,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C52EC5AB2C31952C004F6BDB /* SearchAndCurrentLocation */ = {
+			isa = PBXGroup;
+			children = (
+				C52EC5AD2C3195B9004F6BDB /* ViewModel */,
+				C5DFEF802BFD9D7900E5C3E7 /* Model */,
+				C5CA66172BF26196007BDAC8 /* View */,
+			);
+			path = SearchAndCurrentLocation;
+			sourceTree = "<group>";
+		};
+		C52EC5AD2C3195B9004F6BDB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C5CA661E2BF2632D007BDAC8 /* MapViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		C5315E172C11A69B00C96F96 /* PracticeBookMap */ = {
 			isa = PBXGroup;
 			children = (
@@ -77,14 +95,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		C5CA66182BF261A5007BDAC8 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C5CA661E2BF2632D007BDAC8 /* MapViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		C5CE90402BEB43F100D76233 = {
 			isa = PBXGroup;
 			children = (
@@ -104,13 +114,11 @@
 		C5CE904B2BEB43F100D76233 /* PracticeMapKit */ = {
 			isa = PBXGroup;
 			children = (
-				C5315E172C11A69B00C96F96 /* PracticeBookMap */,
-				C5DFEF802BFD9D7900E5C3E7 /* Model */,
-				C5CA66202BF26747007BDAC8 /* Info.plist */,
-				C5CA66182BF261A5007BDAC8 /* ViewModel */,
-				C5CA66172BF26196007BDAC8 /* View */,
 				C5CE904C2BEB43F100D76233 /* PracticeMapKitApp.swift */,
 				C5CE904E2BEB43F100D76233 /* ContentView.swift */,
+				C52EC5AB2C31952C004F6BDB /* SearchAndCurrentLocation */,
+				C5315E172C11A69B00C96F96 /* PracticeBookMap */,
+				C5CA66202BF26747007BDAC8 /* Info.plist */,
 				C5CA66212BF267E9007BDAC8 /* MapAnnotationView.swift */,
 				C5CE90502BEB43F200D76233 /* Assets.xcassets */,
 				C5CE90522BEB43F200D76233 /* Preview Content */,
