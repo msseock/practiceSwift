@@ -10,10 +10,13 @@ import MapKit
 
 // MARK: UIKit MapView
 struct MapViewHelper: UIViewRepresentable {
-    @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject var locationManager: SearchLocationManager
 
     func makeUIView(context: Context) -> MKMapView {
         context.coordinator.setupGesture(on: locationManager.mapView)
+        // pointsOfInterest(지도에 표시되어있는 마크로) 선택 가능하도록
+        // 스택 오버플로 선생님 사랑합니다
+        locationManager.mapView.selectableMapFeatures = [.pointsOfInterest]
         return locationManager.mapView
     }
     
@@ -24,9 +27,9 @@ struct MapViewHelper: UIViewRepresentable {
     }
     
     class Coordinator: NSObject, UIGestureRecognizerDelegate {
-        var locationManager: LocationManager
+        var locationManager: SearchLocationManager
         
-        init(locationManager: LocationManager) {
+        init(locationManager: SearchLocationManager) {
             self.locationManager = locationManager
         }
         

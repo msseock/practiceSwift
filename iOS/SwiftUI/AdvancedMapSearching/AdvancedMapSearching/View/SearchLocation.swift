@@ -9,11 +9,20 @@ import SwiftUI
 import MapKit
 
 struct SearchLocation: View {
-    @StateObject var locationManager: LocationManager = .init()
+    // MARK: - Properties
+    @StateObject var locationManager: SearchLocationManager = .init()
+    
     /// SearchLocation(현재 화면) 모달 취소 버튼 누르면 없어지도록 하기 위한 변수
     @Binding var showingSearchLocation: Bool
+    
     /// 위치 선택 모달 띄우기 위한 변수
     @State private var showingMapViewSelection = false
+    
+    /// 부모 뷰에 선택위치 전달해주기 위한 변수
+    @Binding var pickedPlaceMark: MKPlacemark?
+    
+    
+    // MARK: - body
     var body: some View {
         VStack {
             // 위치 검색 박스
@@ -34,10 +43,8 @@ struct SearchLocation: View {
                                     locationManager.pickedLocation = .init(latitude: coordinate.latitude, longitude: coordinate.longitude)
                                     locationManager.mapView.region = .init(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
                                     locationManager.addPin(at: coordinate)
-                                    locationManager.pickedPlaceMark = place
-//                                    locationManager.updatePlacemark(location: .init(latitude: coordinate.latitude, longitude: coordinate.longitude))
+                                    locationManager.updatePlacemark(placemark: place)
                                 }
-                                
                                 
                                 // Navigating to MapView
                                 showingMapViewSelection = true
@@ -49,8 +56,7 @@ struct SearchLocation: View {
                                         .font(.headline)
                                         .foregroundStyle(Color.black)
                                     // 주소
-                                    // (임시) 함수로도 사용해보려고 했으나..뷰라서 아직 좋은 방법을 못찾음
-                                    Text([place.country, place.administrativeArea, place.locality, place.thoroughfare, place.subThoroughfare].compactMap { $0 }.joined(separator: " "))
+                                    Text(place.title ?? "")
                                         .font(.caption)
                                         .foregroundStyle(Color.gray)
                                 }
@@ -86,22 +92,24 @@ struct SearchLocation: View {
                                         .foregroundStyle(Color.gray)
                                 }
                             }
-//                            .swipeActions(edge: .trailing) {
-//                                Button {
-//                                    print("delete")
-//                                    // TODO: 리스트에서 이미지 모양으로 밀어서 없애기
-//                                    if let index = RecentLocationData.locations?.firstIndex(where: { $0.id == place.id }) {
-//                                        print("index: \(index)")
-//                                        withAnimation {
-//                                            recentLocations.remove(at: index)
-//                                            RecentLocationData.locations?.remove(at: index)
-//                                        }
-//                                    }
-//                                } label: {
-//                                    Image(systemName: "trash")
-//                                }
-//                                .tint(.red)
-//                            }
+                            // 리스트에서 이미지 모양으로 밀어서 없애기
+                            .swipeActions(edge: .trailing) {
+                                Button(role: .destructive) {
+                                    // UI상에서 없애기
+                                    if let index = RecentLocationData.locations?.firstIndex(where: { $0.id == place.id }) {
+                                        print("index: \(index)")
+                                        withAnimation {
+                                            recentLocations.remove(at: index)
+                                            RecentLocationData.locations?.remove(at: index)
+                                        }
+                                    }
+                                    
+                                    // TODO: API 최근위치 삭제 호출하기
+                                } label: {
+                                    Image(systemName: "trash.fill")
+                                }
+                                .tint(.red)
+                            }
                         }
                         .onDelete { IndexSet in
                             print("onDelete")
@@ -127,11 +135,20 @@ struct SearchLocation: View {
                 .environmentObject(locationManager)
                 .toolbarRole(.editor)
         }
+        .onDisappear {
+            // 페이지 닫힐 때 선택값 전달
+            // MapViewSelection에서 확정한 위치가 있다면 그 위치로 입력, 없다면 비워서 전달
+            if let pickedPlaceMark = locationManager.pickedPlaceMark {
+                self.pickedPlaceMark = pickedPlaceMark
+            } else {
+                self.pickedPlaceMark = nil
+            }
+        }
     }
 }
 
 #Preview {
-    SearchLocation(showingSearchLocation: .constant(true))
+    SearchLocation(showingSearchLocation: .constant(true), pickedPlaceMark: .constant(nil))
 }
 
 extension SearchLocation {
@@ -163,23 +180,28 @@ extension SearchLocation {
             }
             
         } label: {
-            Label {
+            HStack {
+                // TODO: 디자인 확정되면 반영해두기
+//                if (locationManager.userLocation == nil) {
+//                    // 유저 위치 안구해졌을 때는 버튼 disable 시키고 텍스트 옆에 로딩 표시
+//                    ProgressView()
+//                } else {
+                    Image(systemName: "location.circle.fill")
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(.blue, Color(red: 209/255, green: 209/255, blue: 214/255))
+                        .font(.title2)
+//                }
                 Text("현재 위치")
-//                            .font(.callout)
-                    .foregroundStyle(.black/*TODO: 나중에 black0으로 바꾸기*/)
-            } icon: {
-                Image(systemName: "location.circle.fill")
-                    .symbolRenderingMode(.palette)
-                    .foregroundStyle(.blue, Color(red: 209/255, green: 209/255, blue: 214/255))
-                    .font(.title2)
+                
+                if (locationManager.userLocation == nil) {
+                    // 유저 위치 안구해졌을 때는 버튼 disable 시키고 텍스트 옆에 로딩 표시
+                    ProgressView()
+                }
+                
             }
+
         }
+        .disabled(locationManager.userLocation == nil)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
-
-
-
-//func getAddress(place: CLPlacemark) -> String {
-//    return [place.country, place.administrativeArea, place.locality, place.thoroughfare, place.subThoroughfare].compactMap { $0 }.joined(separator: " ")
-//}
