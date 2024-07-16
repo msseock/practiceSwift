@@ -33,7 +33,7 @@ struct SearchLocation: View {
                                 if let coordinate = place.location?.coordinate {
                                     locationManager.pickedLocation = .init(latitude: coordinate.latitude, longitude: coordinate.longitude)
                                     locationManager.mapView.region = .init(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-                                    locationManager.addDraggablePin(coordinate: coordinate)
+                                    locationManager.addPin(at: coordinate)
                                     locationManager.pickedPlaceMark = place
 //                                    locationManager.updatePlacemark(location: .init(latitude: coordinate.latitude, longitude: coordinate.longitude))
                                 }
@@ -67,7 +67,7 @@ struct SearchLocation: View {
                                 let coordinate = place.coordinate
                                 locationManager.pickedLocation = .init(latitude: coordinate.latitude, longitude: coordinate.longitude)
                                 locationManager.mapView.region = .init(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-                                locationManager.addDraggablePin(coordinate: coordinate)
+                                locationManager.addPin(at: coordinate)
                                 locationManager.updatePlacemark(location: .init(latitude: coordinate.latitude, longitude: coordinate.longitude))
                                 
                                 
@@ -155,7 +155,7 @@ extension SearchLocation {
             // MARK: Setting Map Region
             if let coordinate = locationManager.userLocation?.coordinate {
                 locationManager.mapView.region = .init(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-                locationManager.addDraggablePin(coordinate: coordinate)
+                locationManager.addPin(at: coordinate)
                 locationManager.updatePlacemark(location: .init(latitude: coordinate.latitude, longitude: coordinate.longitude))
                 
                 // MARK: Navigating to MapView

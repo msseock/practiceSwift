@@ -100,29 +100,37 @@ class LocationManager: NSObject, ObservableObject, MKMapViewDelegate, CLLocation
         // Handle error
     }
     
-    // MARK: Add Draggable Pin to MapView
-    func addDraggablePin(coordinate: CLLocationCoordinate2D) {
+    // MARK: Add Pin to MapView
+    func addPin(at coordinate: CLLocationCoordinate2D) {
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
-//        annotation.title = "선택할 위치"
-        
         mapView.addAnnotation(annotation)
     }
     
-    // MARK: Enabling Dragging
+    // MARK: Annotation 위치 표시
     func mapView(_ mapView: MKMapView, viewFor annotation: any MKAnnotation) -> MKAnnotationView? {
         let marker = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "DELIVERYPIN")
-        marker.isDraggable = true
         marker.canShowCallout = false
         
         return marker
     }
     
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
-        guard let newLocation = view.annotation?.coordinate else { return }
-        self.pickedLocation = .init(latitude: newLocation.latitude, longitude: newLocation.longitude)
-        updatePlacemark(location: .init(latitude: newLocation.latitude, longitude: newLocation.longitude))
+    // MARK: Update location by tapping on the map
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let tappedLocatioin = view.annotation?.coordinate else { return }
+        
+        // Update the picked location
+        self.pickedLocation = CLLocation(latitude: tappedLocatioin.latitude, longitude: tappedLocatioin.longitude)
+        
+        // Clear existing annotations and add a new one
+        mapView.removeAnnotations(mapView.annotations)
+        addPin(at: tappedLocatioin)
+        
+        // Update placemark for the new location
+        updatePlacemark(location: CLLocation(latitude: tappedLocatioin.latitude, longitude: tappedLocatioin.longitude))
+        
     }
+    
     
     func updatePlacemark(location: CLLocation) {
         Task {
@@ -136,6 +144,14 @@ class LocationManager: NSObject, ObservableObject, MKMapViewDelegate, CLLocation
             }
         }
     }
+    
+    func updateLocationAndPlacemark(coordinate: CLLocationCoordinate2D) {
+        self.pickedLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        mapView.removeAnnotations(mapView.annotations)
+        addPin(at: coordinate)
+        updatePlacemark(location: CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude))
+    }
+
     
     // MARK: Displaying New Location Data
     func reverseLocationCoordinates(location: CLLocation) async throws->CLPlacemark? {
