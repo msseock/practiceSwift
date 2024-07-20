@@ -17,9 +17,9 @@ struct ContentView: View {
             TextField("번역할 텍스트를 입력하세요", text: $text)
             
             Button {
-                translateService.translateText(text: text)
+                translateService.translateText()
             } label: {
-                Text("translate")
+                Text("번역하기")
             }
             
             Text("your text: \(text)")
