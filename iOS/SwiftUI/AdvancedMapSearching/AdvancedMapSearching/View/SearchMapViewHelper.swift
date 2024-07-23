@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 // MARK: UIKit MapView
-struct MapViewHelper: UIViewRepresentable {
+struct SearchMapViewHelper: UIViewRepresentable {
     @EnvironmentObject var locationManager: SearchLocationManager
 
     func makeUIView(context: Context) -> MKMapView {

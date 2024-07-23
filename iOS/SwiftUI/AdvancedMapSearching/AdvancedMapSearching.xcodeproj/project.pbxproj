@@ -13,8 +13,8 @@
 		C52EC5C92C31A20C004F6BDB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C52EC5C82C31A20C004F6BDB /* Preview Assets.xcassets */; };
 		C52EC5D42C31A441004F6BDB /* SearchLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52EC5D32C31A441004F6BDB /* SearchLocationManager.swift */; };
 		C52EC5D62C31A457004F6BDB /* SearchLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52EC5D52C31A457004F6BDB /* SearchLocation.swift */; };
-		C58045532C31CEE900AAA596 /* MapViewSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58045522C31CEE900AAA596 /* MapViewSelection.swift */; };
-		C58045552C31CF2700AAA596 /* MapViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58045542C31CF2700AAA596 /* MapViewHelper.swift */; };
+		C58045532C31CEE900AAA596 /* SearchLocationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58045522C31CEE900AAA596 /* SearchLocationMap.swift */; };
+		C58045552C31CF2700AAA596 /* SearchMapViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58045542C31CF2700AAA596 /* SearchMapViewHelper.swift */; };
 		C58045582C31E42A00AAA596 /* recentlySearchedLocationsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58045572C31E42A00AAA596 /* recentlySearchedLocationsData.swift */; };
 		C580455B2C31E47200AAA596 /* SearchLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C580455A2C31E47200AAA596 /* SearchLocationModel.swift */; };
 /* End PBXBuildFile section */
@@ -27,8 +27,8 @@
 		C52EC5C82C31A20C004F6BDB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C52EC5D32C31A441004F6BDB /* SearchLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationManager.swift; sourceTree = "<group>"; };
 		C52EC5D52C31A457004F6BDB /* SearchLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocation.swift; sourceTree = "<group>"; };
-		C58045522C31CEE900AAA596 /* MapViewSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewSelection.swift; sourceTree = "<group>"; };
-		C58045542C31CF2700AAA596 /* MapViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewHelper.swift; sourceTree = "<group>"; };
+		C58045522C31CEE900AAA596 /* SearchLocationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationMap.swift; sourceTree = "<group>"; };
+		C58045542C31CF2700AAA596 /* SearchMapViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMapViewHelper.swift; sourceTree = "<group>"; };
 		C58045572C31E42A00AAA596 /* recentlySearchedLocationsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recentlySearchedLocationsData.swift; sourceTree = "<group>"; };
 		C580455A2C31E47200AAA596 /* SearchLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,8 +95,8 @@
 			isa = PBXGroup;
 			children = (
 				C52EC5D52C31A457004F6BDB /* SearchLocation.swift */,
-				C58045542C31CF2700AAA596 /* MapViewHelper.swift */,
-				C58045522C31CEE900AAA596 /* MapViewSelection.swift */,
+				C58045542C31CF2700AAA596 /* SearchMapViewHelper.swift */,
+				C58045522C31CEE900AAA596 /* SearchLocationMap.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -180,9 +180,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C52EC5D62C31A457004F6BDB /* SearchLocation.swift in Sources */,
-				C58045532C31CEE900AAA596 /* MapViewSelection.swift in Sources */,
+				C58045532C31CEE900AAA596 /* SearchLocationMap.swift in Sources */,
 				C52EC5C42C31A20B004F6BDB /* ContentView.swift in Sources */,
-				C58045552C31CF2700AAA596 /* MapViewHelper.swift in Sources */,
+				C58045552C31CF2700AAA596 /* SearchMapViewHelper.swift in Sources */,
 				C580455B2C31E47200AAA596 /* SearchLocationModel.swift in Sources */,
 				C58045582C31E42A00AAA596 /* recentlySearchedLocationsData.swift in Sources */,
 				C52EC5C22C31A20B004F6BDB /* AdvancedMapSearchingApp.swift in Sources */,

@@ -129,9 +129,9 @@ struct SearchLocation: View {
             showingSearchLocation = false
         })
         .navigationBarTitle(Text("위치 검색"), displayMode: .inline)
-        // MapViewSelection sheet로 보여주기
+        // SearchLocationMap sheet로 보여주기
         .sheet(isPresented: $showingMapViewSelection) {
-            MapViewSelection(showingSearchLocation: $showingSearchLocation, showingMapViewSelection: $showingMapViewSelection)
+            SearchLocationMap(showingSearchLocation: $showingSearchLocation, showingMapViewSelection: $showingMapViewSelection)
                 .environmentObject(locationManager)
                 .toolbarRole(.editor)
         }
@@ -181,23 +181,17 @@ extension SearchLocation {
             
         } label: {
             HStack {
-                // TODO: 디자인 확정되면 반영해두기
-//                if (locationManager.userLocation == nil) {
-//                    // 유저 위치 안구해졌을 때는 버튼 disable 시키고 텍스트 옆에 로딩 표시
-//                    ProgressView()
-//                } else {
+                // 유저 위치 안구해졌을 때는 버튼 disable 시키고 텍스트 옆에 로딩 표시
+                if (locationManager.userLocation == nil) {
+                    ProgressView()
+                } else {
                     Image(systemName: "location.circle.fill")
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(.blue, Color(red: 209/255, green: 209/255, blue: 214/255))
                         .font(.title2)
-//                }
-                Text("현재 위치")
-                
-                if (locationManager.userLocation == nil) {
-                    // 유저 위치 안구해졌을 때는 버튼 disable 시키고 텍스트 옆에 로딩 표시
-                    ProgressView()
                 }
-                
+                Text("현재 위치")
+                            
             }
 
         }

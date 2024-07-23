@@ -1,5 +1,5 @@
 //
-//  MapViewSelection.swift
+//  SearchLocationMap.swift
 //  AdvancedMapSearching
 //
 //  Created by 석민솔 on 7/1/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: MapView Live Selection
-struct MapViewSelection: View {
+struct SearchLocationMap: View {
     @EnvironmentObject var locationManager: SearchLocationManager
     
     /// SearchLocation(부모 화면) 모달 취소 버튼 누르면 없어지도록 하기 위한 변수
@@ -24,34 +24,35 @@ struct MapViewSelection: View {
     
     var body: some View {
         ZStack {
-            MapViewHelper()
+            SearchMapViewHelper()
                 .environmentObject(locationManager)
                 .ignoresSafeArea()
             
-            // 닫기 임시버튼
-            Button {
-                showingMapViewSelection = false
-            } label: {
-                HStack {
-                    // TODO: 닫기버튼 디자인 회의결과 반영하기
-                    Image(systemName: "xmark")
-//                    Text("닫기")
-                }
-                .padding(15)
-                .background(
-                    RoundedRectangle(cornerRadius: 30)
-                        .foregroundStyle(Color.white)
-                )
-            }
-            .padding()
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                         
             // MARK: Displaying Data
             if let place = locationManager.pickedPlaceMark {
                 VStack(spacing: 15) {
-                    Text("위치 선택")
-                        .font(.title2.bold())
+                    // 타이틀바
+                    HStack(alignment: .center) {
+                        ZStack {
+                            // < 버튼
+                            Button {
+                                showingMapViewSelection = false
+                            } label: {
+                                Image(systemName: "chevron.left")
+                                    .font(.title2)
+                                    .foregroundStyle(Color.black) // TODO: black0으로 바꾸기
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            // 위치선택 제목 텍스트
+                            Text("위치 선택")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                        }
+                    }
                     
+                    // 위치정보
                     HStack(spacing: 15) {
                         Image(systemName: "mappin.circle.fill")
                             .font(.title2)
@@ -72,7 +73,7 @@ struct MapViewSelection: View {
                     .padding(.vertical, 10)
                     
                     Button {
-                        // TODO: 최종선택위치 결정하기
+                        // 최종선택위치 결정
                         isConfirmed = true
                         // SearchLocation, 현재화면 닫기
                         showingMapViewSelection = false
@@ -83,7 +84,7 @@ struct MapViewSelection: View {
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 12)
                             .background {
-                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                RoundedRectangle(cornerRadius: 30, style: .continuous)
                                     .fill(.accent)
                             }
                             .overlay(alignment: .trailing) {
