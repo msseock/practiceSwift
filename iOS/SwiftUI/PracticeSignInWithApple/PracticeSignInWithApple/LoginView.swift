@@ -9,7 +9,7 @@ import SwiftUI
 import AuthenticationServices
 
 
-struct Login: View {
+struct LoginView: View {
     @State private var isLoginSucceed = false
     
     var body: some View {
@@ -17,9 +17,6 @@ struct Login: View {
         
         // 로그인 버튼
         SignInWithAppleButton { (request) in
-            
-            // requesting parameters from apple login
-            request.requestedScopes = [.email]
             
         } onCompletion: { (result) in
             
@@ -36,11 +33,16 @@ struct Login: View {
                 }
                 
                 let userIdentifier = credential.user
-                let userEmail = credential.email
+                let idToken = credential.identityToken // 서버에 보내줄 토큰
                 
+                // 값 저장하기
+                UserDefaults.standard.set(userIdentifier, forKey: "appleUID")
+
+                // 값 불러오기
+                let appleIdentifier = UserDefaults.standard.string(forKey: "appleUID")
                 
-                print("userID: \(userIdentifier)")
-                print("user email: \(userEmail)")
+                print("userID: \(String(describing: appleIdentifier))")
+                print("user idToken: \(String(decoding: idToken!, as: UTF8.self))")
                 
             case .failure(let error):
                 print(error.localizedDescription)
@@ -49,7 +51,7 @@ struct Login: View {
         }
         .signInWithAppleButtonStyle(.black)
         .frame(height: 55)
-        .clipShape(Capsule())
+        .clipShape(RoundedRectangle(cornerRadius: 12))
         .padding(.horizontal)
         
         if (isLoginSucceed) {
@@ -60,5 +62,5 @@ struct Login: View {
 }
 
 #Preview {
-    Login()
+    LoginView()
 }

@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		C546F86B2B6FE2A500B85FDF /* PracticeSignInWithAppleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C546F86A2B6FE2A500B85FDF /* PracticeSignInWithAppleApp.swift */; };
-		C546F86D2B6FE2A500B85FDF /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = C546F86C2B6FE2A500B85FDF /* Login.swift */; };
+		C546F86D2B6FE2A500B85FDF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C546F86C2B6FE2A500B85FDF /* LoginView.swift */; };
 		C546F86F2B6FE2A700B85FDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C546F86E2B6FE2A700B85FDF /* Assets.xcassets */; };
 		C546F8722B6FE2A700B85FDF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C546F8712B6FE2A700B85FDF /* Preview Assets.xcassets */; };
 		C546F87A2B6FE72300B85FDF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C546F8792B6FE72300B85FDF /* ContentView.swift */; };
+		C55B18562C3A6C99001967AE /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55B18552C3A6C99001967AE /* LoginModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C546F8672B6FE2A500B85FDF /* PracticeSignInWithApple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PracticeSignInWithApple.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C546F86A2B6FE2A500B85FDF /* PracticeSignInWithAppleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeSignInWithAppleApp.swift; sourceTree = "<group>"; };
-		C546F86C2B6FE2A500B85FDF /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		C546F86C2B6FE2A500B85FDF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C546F86E2B6FE2A700B85FDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C546F8712B6FE2A700B85FDF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C546F8782B6FE2BE00B85FDF /* PracticeSignInWithApple.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PracticeSignInWithApple.entitlements; sourceTree = "<group>"; };
 		C546F8792B6FE72300B85FDF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C55B18552C3A6C99001967AE /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +59,10 @@
 				C546F8782B6FE2BE00B85FDF /* PracticeSignInWithApple.entitlements */,
 				C546F86A2B6FE2A500B85FDF /* PracticeSignInWithAppleApp.swift */,
 				C546F8792B6FE72300B85FDF /* ContentView.swift */,
-				C546F86C2B6FE2A500B85FDF /* Login.swift */,
+				C546F86C2B6FE2A500B85FDF /* LoginView.swift */,
 				C546F86E2B6FE2A700B85FDF /* Assets.xcassets */,
 				C546F8702B6FE2A700B85FDF /* Preview Content */,
+				C55B18552C3A6C99001967AE /* LoginModel.swift */,
 			);
 			path = PracticeSignInWithApple;
 			sourceTree = "<group>";
@@ -143,7 +146,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C546F86D2B6FE2A500B85FDF /* Login.swift in Sources */,
+				C546F86D2B6FE2A500B85FDF /* LoginView.swift in Sources */,
+				C55B18562C3A6C99001967AE /* LoginModel.swift in Sources */,
 				C546F86B2B6FE2A500B85FDF /* PracticeSignInWithAppleApp.swift in Sources */,
 				C546F87A2B6FE72300B85FDF /* ContentView.swift in Sources */,
 			);
