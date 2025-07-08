@@ -13,6 +13,8 @@ struct ContentView: View {
     @State private var measuredHeight: Float = 0.0
     // AR 원점이 바닥을 기준으로 설정되었는지 확인하는 변수
     @State private var isOriginSet: Bool = false
+    
+    @StateObject private var motionManager = MotionManager()
 
     var body: some View {
         ZStack {
@@ -20,18 +22,26 @@ struct ContentView: View {
             ARViewContainer(measuredHeight: $measuredHeight, isOriginSet: $isOriginSet)
                 .edgesIgnoringSafeArea(.all)
 
-            VStack {
+            VStack(alignment: .center) {
                 Spacer()
                 
                 // 원점이 설정된 후에만 높이를 표시
                 if isOriginSet {
                     Text(String(format: "%.2f m", measuredHeight))
                         .font(.system(size: 80, weight: .bold, design: .rounded))
-                        .foregroundColor(.white)
                         .shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 5)
                 }
+                
+                
+                Text("x: \(motionManager.x, specifier: "%.2f")")
+                    .foregroundStyle(motionManager.properx ? .white : .red)
+                Text("y: \(motionManager.y, specifier: "%.2f")")
+                Text("z: \(motionManager.z, specifier: "%.2f")")
+                    .foregroundStyle(motionManager.properz ? .white : .red)
+                
                 Spacer()
             }
+            .foregroundColor(.white)
             
             // AR 원점이 설정되기 전까지 안내 문구 표시
             if !isOriginSet {
