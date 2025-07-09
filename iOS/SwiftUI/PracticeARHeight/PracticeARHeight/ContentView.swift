@@ -9,27 +9,24 @@ import SwiftUI
 
 // 메인 컨텐츠 뷰
 struct ContentView: View {
-    // 측정된 높이를 저장하는 상태 변수
-    @State private var measuredHeight: Float = 0.0
-    // AR 원점이 바닥을 기준으로 설정되었는지 확인하는 변수
-    @State private var isOriginSet: Bool = false
-    
     @StateObject private var motionManager = MotionManager()
+    @StateObject private var heightManager = HeightManager()
 
     var body: some View {
         ZStack {
             // AR 카메라 뷰
-            ARViewContainer(measuredHeight: $measuredHeight, isOriginSet: $isOriginSet)
+            ARViewContainer(measuredHeight: $heightManager.measuredHeight, isGroundFound: $heightManager.isGroundFound)
                 .edgesIgnoringSafeArea(.all)
 
             VStack(alignment: .center) {
                 Spacer()
                 
                 // 원점이 설정된 후에만 높이를 표시
-                if isOriginSet {
-                    Text(String(format: "%.2f m", measuredHeight))
+                if heightManager.isGroundFound {
+                    Text(String(format: "%.2f m", heightManager.measuredHeight))
                         .font(.system(size: 80, weight: .bold, design: .rounded))
                         .shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 5)
+                        .foregroundStyle(heightManager.isProperHeight ? .white : .yellow)
                 }
                 
                 
@@ -44,7 +41,7 @@ struct ContentView: View {
             .foregroundColor(.white)
             
             // AR 원점이 설정되기 전까지 안내 문구 표시
-            if !isOriginSet {
+            if !heightManager.isGroundFound {
                 VStack {
                     Text("바닥을 인식 중입니다...\n아이폰을 바닥을 향해 천천히 움직여주세요.")
                         .font(.headline)
