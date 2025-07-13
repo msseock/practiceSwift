@@ -29,16 +29,10 @@ struct ContentView: View {
                         .foregroundStyle(heightManager.isProperHeight ? .white : .yellow)
                 }
                 
-                
-                Text("x: \(motionManager.x, specifier: "%.2f")")
-                    .foregroundStyle(motionManager.properx ? .white : .red)
-                Text("y: \(motionManager.y, specifier: "%.2f")")
-                Text("z: \(motionManager.z, specifier: "%.2f")")
-                    .foregroundStyle(motionManager.properz ? .white : .red)
-                
                 Spacer()
             }
-            .foregroundColor(.white)
+            
+            TiltFeedbackView(offsetX: CGFloat(motionManager.offsetX), offsetY: CGFloat(motionManager.offsetZ))
             
             // AR 원점이 설정되기 전까지 안내 문구 표시
             if !heightManager.isGroundFound {

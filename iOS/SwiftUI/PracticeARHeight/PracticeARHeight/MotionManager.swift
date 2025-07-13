@@ -11,32 +11,37 @@ import CoreMotion
 class MotionManager: ObservableObject {
     private var motionManager = CMMotionManager()
 
-    // 좌우균형
-    @Published var x: Double = 0.0 {
+    /// 좌우균형
+    @Published var degreeX: Double = 0.0 {
         didSet {
-            if abs(x) > 0.05 {
-                properx = false
-            } else {
-                properx = true
-            }
+            offsetX = Float(degreeX - properX) * 100
+//            if abs(x) > 0.05 {
+//                properx = false
+//            } else {
+//                properx = true
+//            }
         }
     }
     
     @Published var y: Double = 0.0
     
-    // 앞뒤기울기
-    @Published var z: Double = 0.0 {
+    /// 앞뒤기울기
+    @Published var degreeZ: Double = 0.0 {
         didSet {
-            if z < 0.1 || 0.2 < z {
-                properz = false
-            } else {
-                properz = true
-            }
+            offsetZ = Float(degreeZ - properZ) * 100
+//            if z < 0.1 || 0.2 < z {
+//                properz = false
+//            } else {
+//                properz = true
+//            }
         }
     }
     
-    @Published var properx: Bool = true
-    @Published var properz: Bool = true
+    let properX: Double = 0
+    let properZ: Double = 0.1
+    
+    @Published var offsetX: Float = 0
+    @Published var offsetZ: Float = 0
 
     init() {
         // 3. 디바이스 모션 업데이트 시작
@@ -46,9 +51,9 @@ class MotionManager: ObservableObject {
                 guard let self = self, let data = data else { return }
 
                 // 4. gravity 데이터에서 x, y, z값을 가져와 @Published 프로퍼티에 할당
-                self.x = data.gravity.x
+                self.degreeX = data.gravity.x
                 self.y = data.gravity.y
-                self.z = data.gravity.z
+                self.degreeZ = data.gravity.z
             }
         }
     }
