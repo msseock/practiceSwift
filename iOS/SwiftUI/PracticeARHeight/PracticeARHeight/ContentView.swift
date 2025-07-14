@@ -23,14 +23,14 @@ struct ContentView: View {
                 
                 // 원점이 설정된 후에만 높이를 표시
                 if heightManager.isGroundFound {
-                    Text(String(format: "%.2f m", heightManager.measuredHeight))
-                        .font(.system(size: 80, weight: .bold, design: .rounded))
-                        .shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 5)
-                        .foregroundStyle(heightManager.isProperHeight ? .white : .yellow)
+                    Text(String(format: "%.0f cm", heightManager.offsetY))
+                    HeightFeedbackView(offsetY: CGFloat(heightManager.offsetY))
                 }
                 
                 Spacer()
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 20)
             
             TiltFeedbackView(offsetX: CGFloat(motionManager.offsetX), offsetY: CGFloat(motionManager.offsetZ))
             
