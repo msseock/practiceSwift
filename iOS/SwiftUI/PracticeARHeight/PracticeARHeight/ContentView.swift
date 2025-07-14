@@ -9,8 +9,14 @@ import SwiftUI
 
 // 메인 컨텐츠 뷰
 struct ContentView: View {
-    @StateObject private var motionManager = MotionManager()
+    @StateObject private var tiltCollector: TiltDataCollector
+    @StateObject private var tiltManager: TiltManager
     @StateObject private var heightManager = HeightManager()
+    
+    init(tiltCollector: TiltDataCollector = TiltDataCollector()) {
+        self._tiltCollector = StateObject(wrappedValue: tiltCollector)
+        self._tiltManager = StateObject(wrappedValue: TiltManager(dataCollector: tiltCollector))
+    }
 
     var body: some View {
         ZStack {
@@ -32,7 +38,7 @@ struct ContentView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading, 20)
             
-            TiltFeedbackView(offsetX: CGFloat(motionManager.offsetX), offsetY: CGFloat(motionManager.offsetZ))
+            TiltFeedbackView(offsetX: CGFloat(tiltManager.offsetX), offsetY: CGFloat(tiltManager.offsetZ))
             
             // AR 원점이 설정되기 전까지 안내 문구 표시
             if !heightManager.isGroundFound {
