@@ -6,8 +6,36 @@
 //
 
 import SwiftUI
+/**
+ 높이가 특정 지점과 얼마나 일치하는지 시각적으로 피드백을 제공하는 뷰
 
-/// 높이가 특정 일치와 일치하는지 확인하는 뷰
+ 이 뷰는 중앙의 목표 지점을 기준으로 사용자의 현재 높이(또는 다른 값)가 얼마나 차이 나는지를
+ 움직이는 원으로 표시하여 직관적인 피드백을 줍니다.
+
+ ## 사용 예시
+ ```
+ @StateObject private var heightManager = HeightManager()
+
+ var body: some View {
+     ZStack {
+         // AR 카메라 뷰
+         HeightMeasurementARView(measuredHeight: $heightManager.measuredHeight, isGroundFound: $heightManager.isGroundFound)
+             .edgesIgnoringSafeArea(.all)
+
+         // 원점이 설정된 후에만 높이를 표시
+         if heightManager.isGroundFound {
+            HeightFeedbackView(offsetY: CGFloat(heightManager.offsetY))
+                 .frame(maxWidth: .infinity, alignment: .leading)
+                 .padding(.leading, 20)
+         }
+    }
+ }
+ ```
+
+ - Parameters:
+   - offsetY: 피드백을 나타내는 원의 수직 오프셋(offset) 값입니다.
+              `0`은 중앙 목표 지점과의 일치를 의미하며, 양수 값은 아래로, 음수 값은 위로 원을 이동시킵니다.
+ */
 struct HeightFeedbackView: View {
     var offsetY: CGFloat
     

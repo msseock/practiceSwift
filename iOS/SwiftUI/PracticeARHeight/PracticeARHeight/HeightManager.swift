@@ -22,7 +22,7 @@ import Foundation
 /// ```swift
 /// @StateObject private var heightManager = HeightManager()
 ///
-/// ARViewContainer(
+/// HeightMeasurementARView(
 ///     measuredHeight: $heightManager.measuredHeight,
 ///     isGroundFound: $heightManager.isGroundFound
 /// )
@@ -68,8 +68,7 @@ class HeightManager: ObservableObject {
     /// 사용자가 서 있어야 하는 이상적인 높이값입니다.
     /// 이 값을 기준으로 현재 높이와의 차이를 계산합니다.
     ///
-    /// - Note: 현재 1.1m로 설정되어 있으며, 필요에 따라 조정 가능합니다.
-    let idealHeight: Float = 1.1
+    let idealHeight: Float
     
     /// UI 표시용 오프셋 값 (센티미터 단위)
     ///
@@ -98,5 +97,9 @@ class HeightManager: ObservableObject {
                 offsetY = 90
             }
         }
+    }
+    
+    init(idealHeight: Float) {
+        self.idealHeight = idealHeight
     }
 }

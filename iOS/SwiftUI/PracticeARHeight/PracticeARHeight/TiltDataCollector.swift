@@ -61,7 +61,7 @@ class TiltDataCollector: ObservableObject {
     /// 4. Gravity 데이터에서 X, Z 값을 추출하여 Published 프로퍼티에 할당
     ///
     /// ## 업데이트 설정
-    /// - **간격**: 0.1초 (초당 10회)
+    /// - **간격**: 초당 60회(60FPS)
     /// - **큐**: 메인 큐 (UI 업데이트에 최적화)
     /// - **데이터 타입**: Device Motion (융합 센서 데이터)
     ///
@@ -73,7 +73,7 @@ class TiltDataCollector: ObservableObject {
     init() {
         // 디바이스 모션 업데이트 시작
         if motionManager.isDeviceMotionAvailable {
-            motionManager.deviceMotionUpdateInterval = 1.0 / 10.0  // 1초에 10번
+            motionManager.deviceMotionUpdateInterval = 1.0 / 60.0  // 1초에 10번
             motionManager.startDeviceMotionUpdates(to: .main) {
                 [weak self] (data, error) in
                 guard let self = self, let data = data else { return }

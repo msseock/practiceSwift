@@ -16,7 +16,7 @@ import Foundation
 
  ## 사용 예시
  ```swift
- let dataCollector = TiltDataCollector()
+ let tiltDataCollector = TiltDataCollector()
  let tiltManager = TiltManager(
      properX: 0.0,
      properZ: 0.0,
@@ -36,42 +36,26 @@ import Foundation
  */
 class TiltManager: ObservableObject {
     
-    /// 기준점이 되는 좌우 기울기값
+    /// 기준점이 되는 기울기값
     ///
-    /// 이 값을 기준으로 현재 기울기와의 차이를 계산하여 `offsetX`를 구합니다.
+    /// 이 값을 기준으로 현재 기울기와의 차이를 계산하여 `offsetX`, `offsetZ`를 구합니다.
     /// 값을 제공하지 않는다면 일반적으로 기기가 수평일 때의 값을 사용합니다.
-    let properX: Double
+    let properTilt: Tilt
+
     
-    /// 기준점이 되는 앞뒤 기울기값
+    /// 계속 변하는 기울기
     ///
-    /// 이 값을 기준으로 현재 기울기와의 차이를 계산하여 `offsetZ`를 구합니다.
-    /// 값을 제공하지 않는다면 일반적으로 기기가 수평일 때의 값을 사용합니다.
-    let properZ: Double
-    
-    /// 계속 변하는 좌우균형값
+    /// `TiltDataCollector`로부터 실시간으로 업데이트되는 기울기 값입니다.
+    /// 값이 변경될 때마다 자동으로 `offsetX`, `offsetZ`가 재계산됩니다.
     ///
-    /// `TiltDataCollector`로부터 실시간으로 업데이트되는 X축 기울기 값입니다.
-    /// 값이 변경될 때마다 자동으로 `offsetX`가 재계산됩니다.
-    ///
-    /// - Note: 이 값은 `TiltDataCollector`의 `gravityX`와 동기화됩니다.
-    @Published var degreeX: Double = 0.0 {
+    /// - Note: 이 값은 `TiltDataCollector`의 `gravityX`, `gravityZ`와 동기화됩니다.
+    @Published var degreeTilt: Tilt = Tilt(degreeX: 0.0, degreeZ: 0.0) {
         didSet {
-            offsetX = Float(degreeX - properX) * 100
+            self.offsetX = Float(degreeTilt.degreeX - properTilt.degreeX) * 100
+            self.offsetZ = Float(degreeTilt.degreeZ - properTilt.degreeZ) * 100
         }
     }
-    
-    /// 계속 변하는 앞뒤기울기
-    ///
-    /// `TiltDataCollector`로부터 실시간으로 업데이트되는 Z축 기울기 값입니다.
-    /// 값이 변경될 때마다 자동으로 `offsetZ`가 재계산됩니다.
-    ///
-    /// - Note: 이 값은 `TiltDataCollector`의 `gravityZ`와 동기화됩니다.
-    @Published var degreeZ: Double = 0.0 {
-        didSet {
-            offsetZ = Float(degreeZ - properZ) * 100
-        }
-    }
-    
+        
     /// UI 표시용 좌우 오프셋 값
     ///
     /// `degreeX`와 `properX`의 차이에 100을 곱한 값입니다.
@@ -94,6 +78,7 @@ class TiltManager: ObservableObject {
     /// 메모리 누수를 방지하고 적절한 생명주기 관리를 수행합니다.
     private var cancellables = Set<AnyCancellable>()
     
+    
     /// TiltManager 인스턴스를 초기화합니다.
     ///
     /// - Parameters:
@@ -107,21 +92,25 @@ class TiltManager: ObservableObject {
     /// ## 중요사항
     /// - `dataCollector`는 이미 초기화되고 데이터 수집이 시작된 상태여야 합니다.
     /// - 초기 오프셋 값은 현재 기울기 값과 기준점의 차이로 계산됩니다.
-    init(properX: Double = 0, properZ: Double = 0, dataCollector: TiltDataCollector) {
-        self.properX = properX
-        self.properZ = properZ
+    init(properTilt: Tilt = Tilt(degreeX: 0.0, degreeZ: 0.0), dataCollector: TiltDataCollector) {
+        self.properTilt = properTilt
         
         // TiltDataCollector의 gravity 값을 실시간으로 구독
         dataCollector.$gravityX
-            .assign(to: \.degreeX, on: self)
+            .assign(to: \.degreeTilt.degreeX, on: self)
             .store(in: &cancellables)
         
         dataCollector.$gravityZ
-            .assign(to: \.degreeZ, on: self)
+            .assign(to: \.degreeTilt.degreeZ, on: self)
             .store(in: &cancellables)
         
         // 초기 오프셋 값 계산
-        self.offsetX = Float(degreeX - properX) * 100
-        self.offsetZ = Float(degreeZ - properZ) * 100
+        self.offsetX = Float(degreeTilt.degreeX - properTilt.degreeX) * 100
+        self.offsetZ = Float(degreeTilt.degreeZ - properTilt.degreeZ) * 100
     }
+}
+
+struct Tilt {
+    var degreeX: Double
+    var degreeZ: Double
 }

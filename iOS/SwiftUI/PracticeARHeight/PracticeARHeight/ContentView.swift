@@ -11,17 +11,20 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var tiltCollector: TiltDataCollector
     @StateObject private var tiltManager: TiltManager
-    @StateObject private var heightManager = HeightManager()
+    @StateObject private var heightManager = HeightManager(idealHeight: 1.1)
     
     init(tiltCollector: TiltDataCollector = TiltDataCollector()) {
         self._tiltCollector = StateObject(wrappedValue: tiltCollector)
-        self._tiltManager = StateObject(wrappedValue: TiltManager(dataCollector: tiltCollector))
+        self._tiltManager = StateObject(wrappedValue: TiltManager(properTilt: Tilt(degreeX: 0, degreeZ: -0.5), dataCollector: tiltCollector))
     }
 
     var body: some View {
         ZStack {
             // AR 카메라 뷰
-            ARViewContainer(measuredHeight: $heightManager.measuredHeight, isGroundFound: $heightManager.isGroundFound)
+            HeightMeasurementARView(
+                measuredHeight: $heightManager.measuredHeight,
+                isGroundFound: $heightManager.isGroundFound
+            )
                 .edgesIgnoringSafeArea(.all)
 
             VStack(alignment: .center) {
@@ -31,6 +34,8 @@ struct ContentView: View {
                 if heightManager.isGroundFound {
                     Text(String(format: "%.0f cm", heightManager.offsetY))
                     HeightFeedbackView(offsetY: CGFloat(heightManager.offsetY))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.leading, 20)
                 }
                 
                 Spacer()
@@ -38,7 +43,10 @@ struct ContentView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading, 20)
             
-            TiltFeedbackView(offsetX: CGFloat(tiltManager.offsetX), offsetY: CGFloat(tiltManager.offsetZ))
+            TiltFeedbackView(
+                offsetX: tiltManager.offsetX,
+                offsetY: tiltManager.offsetZ
+            )
             
             // AR 원점이 설정되기 전까지 안내 문구 표시
             if !heightManager.isGroundFound {
@@ -55,9 +63,11 @@ struct ContentView: View {
             }
         }
         .onAppear {
+            // 뷰가 나타날 때 - 화면 자동 꺼짐 비활성화
             UIApplication.shared.isIdleTimerDisabled = true
         }
         .onDisappear {
+            // 뷰가 사라질 때 - 화면 자동 꺼짐 다시 활성화 (배터리 절약)
             UIApplication.shared.isIdleTimerDisabled = false
         }
     }
